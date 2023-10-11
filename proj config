@@ -1,0 +1,26 @@
+First install the following;
+
+Install-Package Microsoft.EntityFrameworkCore
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
+Install-Package Microsoft.EntityFrameworkCore.Design
+Install-Package Microsoft.EntityFrameworkCore.Tools
+
+
+update app.json:
+,"ConnectionStrings": {
+    "BCSconn":"Server=bookclubsystem.database.windows.net;Database=BCS;Trusted_Connection=false;Encrypt=True;User ID=bcs;Password=password1!; Integrated Security=false;"
+  }
+
+
+
+Then run;
+-- specific tables
+
+Scaffold-DbContext -connection name=TMSconn Microsoft.EntityFrameworkCore.SqlServer -OutputDir Repo/Models -table User,Club  -context TMSDbContext -contextDir Repo -DataAnnotations -F 
+
+--all tables
+Scaffold-DbContext -connection name=TMSconn Microsoft.EntityFrameworkCore.SqlServer -OutputDir Repos/Models  -context TMSDbContext -contextDir Repos -DataAnnotations -F
+
+
+--to update the project if there is any db change run the same thing:
+Scaffold-DbContext -connection name=TMSconn Microsoft.EntityFrameworkCore.SqlServer -OutputDir Repo/Models -table User,Club  -context TMSDbContext -contextDir Repo -DataAnnotations -F
